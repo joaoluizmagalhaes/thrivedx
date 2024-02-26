@@ -1,7 +1,7 @@
 <?php
 /**
  * Plugin Name: ThriveDX Test Plugin
- * Description: This plugin is an assessment for ThriveDX Senior WP developer position. Adds custom text, date, and image fields to posts and displays them on the front end.
+ * Description: This plugin is an assessment for ThriveDX Senior WP developer position. This is a Gutenberg Block Plugin. Adds custom text, date, and image fields to posts and displays them on the front end.
  * Version: 1.0
  * Author: Joao Magalhaes
  * License: GPL2
