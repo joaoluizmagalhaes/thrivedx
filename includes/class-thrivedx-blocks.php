@@ -12,9 +12,23 @@ class ThriveDX_Blocks {
      * Registers custom blocks.
      */
     public static function register_blocks() {
-        // Block registration logic goes here.
+        // Block registration logic goes here
         register_block_type('thrivedx-test-plugin/custom-fields-block', array(
             'editor_script' => 'thrivedx-custom-block',
+            'attributes' => array(
+                'customText' => array(
+                    'type' => 'string',
+                    'default' => '',
+                ),
+                'customDate' => array(
+                    'type' => 'string', // Dates are stored as strings
+                    'default' => '',
+                ),
+                'customImage' => array(
+                    'type' => 'string',
+                    'default' => '',
+                ),
+            ),
         ));
     }
 
@@ -33,9 +47,9 @@ class ThriveDX_Blocks {
         // Optionally enqueue block editor style
         wp_enqueue_style(
             'thrivedx-custom-block-editor-style',
-            plugins_url('../assets/css/editor.css', __FILE__),
+            plugins_url('../assets/css/block-editor.css', __FILE__),
             array(),
-            filemtime(plugin_dir_path(__DIR__) . 'assets/css/editor.css')
+            filemtime(plugin_dir_path(__DIR__) . 'assets/css/block-editor.css')
         );
     }
 }
