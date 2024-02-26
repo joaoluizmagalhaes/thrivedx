@@ -9,33 +9,17 @@
  * Text Domain: thrivedx-test-plugin
  */
 
+
 if (!defined('ABSPATH')) {
-    exit; // Exit if accessed directly.
+    exit;
 }
 
-add_action('enqueue_block_editor_assets', 'thrivedx_block_editor_assets');
-function thrivedx_block_editor_assets() {
-    // Enqueue block script
-    wp_enqueue_script(
-        'thrivedx-custom-block',
-        plugins_url('block.js', __FILE__),
-        array('wp-blocks', 'wp-i18n', 'wp-element', 'wp-editor'),
-        filemtime(plugin_dir_path(__FILE__) . 'block.js')
-    );
+// Define plugin version.
+define('THRIVEDX_TEST_PLUGIN_VERSION', '1.0');
 
-    // Optionally enqueue block editor style
-    wp_enqueue_style(
-        'thrivedx-custom-block-editor-style',
-        plugins_url('editor.css', __FILE__),
-        array(),
-        filemtime(plugin_dir_path(__FILE__) . 'editor.css')
-    );
-}
+// Include the blocks class.
+require_once __DIR__ . '/includes/class-thrivedx-blocks.php';
 
-add_action('init', 'thrivedx_register_block');
-function thrivedx_register_block() {
-    register_block_type('thrivedx-test-plugin/custom-fields-block', array(
-        'editor_script' => 'thrivedx-custom-block', // Handle of the block's script.
-        'editor_style'  => 'thrivedx-custom-block-editor-style', // Handle of the block's editor style (optional).
-    ));
-}
+// Initialize the plugin.
+ThriveDX_Blocks::init();
+
