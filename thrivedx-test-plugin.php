@@ -17,6 +17,11 @@ if (!defined('ABSPATH')) {
 // Define plugin version.
 define('THRIVEDX_TEST_PLUGIN_VERSION', '1.0');
 
+// Difined constants for the plugin directory path.
+define('THRIVEDX_PLUGIN_URL', plugin_dir_url(__FILE__));
+define('THRIVEDX_PLUGIN_DIR', plugin_dir_path(__FILE__));
+
+
 // Include the blocks class.
 require_once __DIR__ . '/includes/class-thrivedx-blocks.php';
 

@@ -129,6 +129,14 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
+/**
+ *
+ * Here I'm using the React Extended for Gutenberg Blocks
+ *
+ *
+ */
+
 (0,_wordpress_blocks__WEBPACK_IMPORTED_MODULE_1__.registerBlockType)('thrivedx-test-plugin/custom-fields-block', {
   title: 'Custom Fields Block',
   icon: 'list-view',
@@ -145,6 +153,14 @@ __webpack_require__.r(__webpack_exports__);
     customImage: {
       type: 'string',
       default: ''
+    },
+    textColor: {
+      type: 'string',
+      default: '#000000'
+    },
+    imageClass: {
+      type: 'string',
+      default: 'default-image-class'
     }
   },
   edit: ({
@@ -155,21 +171,27 @@ __webpack_require__.r(__webpack_exports__);
     const {
       customText,
       customDate,
-      customImage
+      customImage,
+      textColor,
+      imageClass
     } = attributes;
     const onSelectImage = media => {
       setAttributes({
         customImage: media.url
       });
     };
+
+    // formating the date to be human reading
     function formatDate(isoDateString) {
       if (!isoDateString) return '';
       const date = new Date(isoDateString);
-      const month = `${date.getMonth() + 1}`.padStart(2, '0'); // getMonth() is zero-based
+      const month = `${date.getMonth() + 1}`.padStart(2, '0');
       const day = `${date.getDate()}`.padStart(2, '0');
       const year = date.getFullYear();
       return `${month}-${day}-${year}`;
     }
+
+    // The custom Fields for the data in the plugin. Added customization for image and text, chosing a border radius for image and color for text. Just as an example in how build it
     return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
       ...blockProps
     }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__.InspectorControls, null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
@@ -201,9 +223,43 @@ __webpack_require__.r(__webpack_exports__);
       }) => (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Button, {
         onClick: open
       }, "Choose Image")
-    })))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", null, "Custom Text: ", customText), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", null, "Custom Date: ", customDate), customImage && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
+    })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+      className: "my-6"
+    }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", null, "Custom Text Color"), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ColorPicker, {
+      color: textColor,
+      onChangeComplete: newColor => setAttributes({
+        textColor: newColor.hex
+      }),
+      disableAlpha: true
+    })), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+      className: "mb-6"
+    }, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.SelectControl, {
+      label: "Image Class",
+      value: imageClass,
+      options: [{
+        label: 'Default',
+        value: 'default-image-class'
+      }, {
+        label: 'Rounded',
+        value: 'rounded-image-class'
+      }, {
+        label: 'Circle',
+        value: 'circle-image-class'
+      }],
+      onChange: selectedClass => setAttributes({
+        imageClass: selectedClass
+      })
+    })))), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", {
+      style: {
+        color: textColor
+      },
+      className: "text-front"
+    }, "Custom Text: ", customText), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", {
+      className: "text-front"
+    }, "Custom Date: ", customDate), customImage && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
       src: customImage,
-      alt: "Custom"
+      alt: "Custom",
+      className: imageClass
     })));
   },
   save: ({
@@ -212,11 +268,21 @@ __webpack_require__.r(__webpack_exports__);
     const {
       customText,
       customDate,
-      customImage
+      customImage,
+      textColor,
+      imageClass
     } = attributes;
-    return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", null, "Custom Text: ", customText), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", null, "Custom Date: ", customDate), customImage && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
+    return (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", {
+      style: {
+        color: textColor
+      },
+      className: "text-front"
+    }, "Custom Text: ", customText), (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", {
+      className: "text-front"
+    }, "Custom Date: ", customDate), customImage && (0,react__WEBPACK_IMPORTED_MODULE_0__.createElement)("img", {
       src: customImage,
-      alt: "Custom"
+      alt: "Custom",
+      className: imageClass
     }));
   }
 });

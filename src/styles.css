@@ -2,6 +2,14 @@
 @tailwind components;
 @tailwind utilities;
 
-.custom-class {
-  @apply mb-6;
+.rounded-image-class {
+  @apply rounded-lg;
+}
+
+.circle-image-class {
+  @apply rounded-full;
+}
+
+.text-front {
+  @apply mb-6
 }

@@ -6,6 +6,7 @@ class ThriveDX_Blocks {
     public static function init() {
         add_action('init', array(__CLASS__, 'register_blocks'));
         add_action('enqueue_block_editor_assets', array(__CLASS__, 'enqueue_editor_assets'));
+		add_action('wp_enqueue_scripts', array(__CLASS__, 'enqueue_front_end_styles'));
     }
 
     /**
@@ -39,17 +40,29 @@ class ThriveDX_Blocks {
         // Enqueue block script
         wp_enqueue_script(
             'thrivedx-custom-block',
-            plugins_url('../assets/js/block.js', __FILE__),
+            THRIVEDX_PLUGIN_URL . '/assets/js/block.js',
             array('wp-blocks', 'wp-i18n', 'wp-element', 'wp-editor'),
-            filemtime(plugin_dir_path(__DIR__) . 'assets/js/block.js')
+            filemtime(THRIVEDX_PLUGIN_URL . 'assets/js/block.js')
         );
 
-        // Optionally enqueue block editor style
+        // Enqueue block editor style
         wp_enqueue_style(
             'thrivedx-custom-block-editor-style',
-            plugins_url('../assets/css/block-editor.css', __FILE__),
+            THRIVEDX_PLUGIN_URL . '/assets/css/block-editor.css',
             array(),
-            filemtime(plugin_dir_path(__DIR__) . 'assets/css/block-editor.css')
+            filemtime(THRIVEDX_PLUGIN_URL .  'assets/css/block-editor.css')
+        );
+    }
+
+	/**
+     * Enqueues styles for the front end.
+     */
+	public static function enqueue_front_end_styles() {
+        wp_enqueue_style(
+            'thrivedx-front-end-styles',
+            THRIVEDX_PLUGIN_URL . '/assets/css/block-editor.css',
+            array(),
+            filemtime(THRIVEDX_PLUGIN_URL . 'assets/css/block-editor.css')
         );
     }
 }

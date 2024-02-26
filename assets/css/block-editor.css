@@ -495,6 +495,10 @@ video {
 .static {
   position: static;
 }
+.my-6 {
+  margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
+}
 .mb-6 {
   margin-bottom: 1.5rem;
 }
@@ -523,6 +527,14 @@ video {
   padding: 1.5rem;
 }
 
-.custom-class {
+.rounded-image-class {
+  border-radius: 0.5rem;
+}
+
+.circle-image-class {
+  border-radius: 9999px;
+}
+
+.text-front {
   margin-bottom: 1.5rem;
 }
